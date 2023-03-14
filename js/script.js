@@ -36,6 +36,50 @@ let firstImage = 0;
 
 itemArray[firstImage].classList.add("active");
 
+// Implemento lo scorrimento delle immagini con il bottone arrowdown
+
+const downBtn =document.querySelector('.arrowdown');
+
+downBtn.addEventListener("click", function() {
+
+  if (firstImage < itemArray.length -1){
+
+  itemArray[firstImage].classList.remove("active"); 
+
+  firstImage++;
+
+  itemArray[firstImage].classList.add("active");
+
+}
+
+});
+
+// Implemento lo scorrimento delle immagini con il bottone arrowup
+
+
+const upBtn=document.querySelector('.arrowup'); 
+
+upBtn.addEventListener ("click", function(){
+
+  if (firstImage > 0 ){
+    
+    itemArray[firstImage].classList.remove("active"); 
+
+    firstImage--;
+  
+    itemArray[firstImage].classList.add("active");
+  
+  }
+})
+
+
+ 
+  
+
+
+
+
+
 
 
 
