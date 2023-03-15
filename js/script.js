@@ -1,4 +1,4 @@
-    // **Consegna:**
+// **Consegna:**
 // Dato un array contenente una lista di cinque immagini, creare un carosello come nello screenshot allegato.
 // **MILESTONE 1**
 // Per prima cosa, creiamo il markup statico: costruiamo il container e inseriamo un'immagine grande al centro: avremo così la struttura base e gli stili pronti per poterci poi concentrare solamente sull'aspetto logico.
@@ -20,70 +20,59 @@ const images = [
   "img/05.jpg",
 ];
 
-// inserisco immagini 
+// inserisco immagini nel DOM con queryselector nel div slider-items
+const item = document.querySelector(".slider-items");
 
-const item = document.querySelector('.slider-items');
+// Creo un ciclo per far scorrere le immagini
+for (let i = 0; i < images.length; i++) {
+  const currentImg = images[i];
 
-for (let i = 0; i < images.length; i++){
-    const currentImg = images[i];
-    const sliderItems =  `<div class="item"><img src="${currentImg}"></div>`;
-    item.innerHTML += sliderItems;
+  // Creo una variabile per aggiungere il div con classe item
+  const sliderItems = `<div class="item"><img src="${currentImg}"></div>`;
+  item.innerHTML += sliderItems;
 }
 
+// Creo una variabile con la quale prelevo il contenitore
 const itemArray = document.getElementsByClassName("item");
 
+// Assegno al primo Elemento dell'array la variabile firstimage
 let firstImage = 0;
 
+// AL primo elemento dell'array vado ad aggiungere la classe active
 itemArray[firstImage].classList.add("active");
 
-// Implemento lo scorrimento delle immagini con il bottone arrowdown
+// creo una variabile per selezionare l'elemento per scrorrere in basso
+const downBtn = document.querySelector(".arrowdown");
 
-const downBtn =document.querySelector('.arrowdown');
+// Aggiungo interazione al click di arrowdown
+downBtn.addEventListener("click", function () {
+  // Se firstimage e' maggiore della lunghezza di itemArray -1 (perche il primo elemento è 0)
+  if (firstImage < itemArray.length - 1) {
+    // rimuovo la classe active
+    itemArray[firstImage].classList.remove("active");
 
-downBtn.addEventListener("click", function() {
+    // avanzo al successivo elemento dell'array che diventera' firstimage
+    firstImage++;
 
-  if (firstImage < itemArray.length -1){
-
-  itemArray[firstImage].classList.remove("active"); 
-
-  firstImage++;
-
-  itemArray[firstImage].classList.add("active");
-
-}
-
+    // e gli aggiungo la classe active
+    itemArray[firstImage].classList.add("active");
+  }               
 });
 
 // Implemento lo scorrimento delle immagini con il bottone arrowup
 
+const upBtn = document.querySelector(".arrowup");
 
-const upBtn=document.querySelector('.arrowup'); 
-
-upBtn.addEventListener ("click", function(){
-
-  if (firstImage > 0 ){
-    
-    itemArray[firstImage].classList.remove("active"); 
+upBtn.addEventListener("click", function () {
+  if (firstImage > 0) {
+    itemArray[firstImage].classList.remove("active");
 
     firstImage--;
-  
+
     itemArray[firstImage].classList.add("active");
-  
   }
-})
+});
 
-
- 
-  
-
-
-
-
-
-
-
-
-
-
-
+// **BONUS 1:**
+// Aggiungere il **ciclo infinito** del carosello. Ovvero se è attiva la prima immagine e l'utente clicca la freccia per andare all’immagine precedente, dovrà comparire l’ultima immagine dell’array e viceversa.
 
